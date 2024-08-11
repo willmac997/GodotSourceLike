@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://dkcbc7eaaufm1"]
+
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_hqbna"]
+[ext_resource type="Script" path="res://Scripts/Debug/DrawRelativeTest.cs" id="2_0m30i"]
+[ext_resource type="Script" path="res://Scripts/Debug/RotateCameraTest.cs" id="2_u6d1q"]
+
+[sub_resource type="Environment" id="Environment_e754o"]
+background_energy_multiplier = 2.0
+ambient_light_color = Color(0.937255, 0.937255, 0.937255, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj4nd"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a8eg0"]
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41kht"]
+albedo_color = Color(0.952941, 0.952941, 0.952941, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sa3sl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_emwii"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nptsl"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqluo"]
+albedo_color = Color(0.847059, 0.847059, 0.847059, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_edw87"]
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_hqbna")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 5, 3, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e754o")
+
+[node name="CameraMarker" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.10213, 0, 0, 0, 0.10213, 0, 0, 0, 0.10213, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_pj4nd")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_a8eg0")
+
+[node name="CameraArmYaw" type="Node3D" parent="CameraMarker"]
+transform = Transform3D(9.79144, 0, 0, 0, 9.79144, 0, 0, 0, 9.79144, 0, 0, 0)
+script = ExtResource("2_u6d1q")
+
+[node name="CameraArmPitch" type="Node3D" parent="CameraMarker/CameraArmYaw"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraMarker/CameraArmYaw/CameraArmPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)
+
+[node name="Box1" type="RigidBody3D" parent="."]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 1.01022, -2.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box1"]
+material_override = SubResource("StandardMaterial3D_41kht")
+mesh = SubResource("BoxMesh_sa3sl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box1"]
+shape = SubResource("BoxShape3D_emwii")
+
+[node name="Box2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0.5, 3.02044, -2)
+script = ExtResource("2_0m30i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box2"]
+material_override = SubResource("StandardMaterial3D_41kht")
+mesh = SubResource("BoxMesh_sa3sl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
+shape = SubResource("BoxShape3D_emwii")
+
+[node name="Box3" type="RigidBody3D" parent="."]
+transform = Transform3D(0.707107, 1.13133e-08, 0.707107, -9.05293e-09, 1, -6.94655e-09, -0.707107, -1.48943e-09, 0.707107, -0.034675, 5.54088, -2.56126)
+script = ExtResource("2_0m30i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box3"]
+material_override = SubResource("StandardMaterial3D_41kht")
+mesh = SubResource("BoxMesh_sa3sl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box3"]
+shape = SubResource("BoxShape3D_emwii")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_nptsl")
+surface_material_override/0 = SubResource("StandardMaterial3D_eqluo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_edw87")
