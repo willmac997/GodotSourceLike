@@ -56,7 +56,7 @@ script = ExtResource("2_u6d1q")
 [node name="Camera3D" type="Camera3D" parent="CameraMarker/CameraArmYaw/CameraArmPitch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)
 
-[node name="Control" parent="CameraMarker/CameraArmYaw/CameraArmPitch/Camera3D" instance=ExtResource("3_m62hp")]
+[node name="Console" parent="CameraMarker/CameraArmYaw/CameraArmPitch/Camera3D" instance=ExtResource("3_m62hp")]
 
 [node name="Box1" type="RigidBody3D" parent="."]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 1.01022, -2.5)

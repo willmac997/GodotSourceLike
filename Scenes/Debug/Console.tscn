@@ -1,68 +1,59 @@
-[gd_scene load_steps=2 format=3 uid="uid://cks7xa6e47upl"]
+[gd_scene load_steps=3 format=3 uid="uid://cks7xa6e47upl"]
 
-[ext_resource type="Theme" uid="uid://bfomwq0lwf8op" path="res://Scenes/Debug/ConsoleTheme.tres" id="1_7udpr"]
+[ext_resource type="Script" path="res://Scripts/Debug/Console.cs" id="1_ff7cy"]
+[ext_resource type="Theme" uid="uid://bfomwq0lwf8op" path="res://Resources/ConsoleTheme.tres" id="2_egc6s"]
 
-[node name="Control" type="Control"]
+[node name="Console" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ff7cy")
 
-[node name="ConsoleCanvas" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="ConsolePanel" type="PanelContainer" parent="ConsoleCanvas"]
+[node name="Panel" type="PanelContainer" parent="Canvas"]
 offset_left = 15.0
 offset_top = 15.0
 offset_right = 396.0
 offset_bottom = 380.0
-theme = ExtResource("1_7udpr")
+theme = ExtResource("2_egc6s")
 
-[node name="Margin" type="MarginContainer" parent="ConsoleCanvas/ConsolePanel"]
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Grid" type="GridContainer" parent="ConsoleCanvas/ConsolePanel/Margin"]
+[node name="MainGrid" type="GridContainer" parent="Canvas/Panel/Margin"]
 layout_mode = 2
 
-[node name="Output" type="TextEdit" parent="ConsoleCanvas/ConsolePanel/Margin/Grid"]
+[node name="OutputHistory" type="TextEdit" parent="Canvas/Panel/Margin/MainGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(0.87451, 0.87451, 0.87451, 1)
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Donec convallis magna nec consequat dictum.
-Fusce sed sollicitudin dolor. 
-Praesent id maximus augue. 
-Pellentesque purus elit, imperdiet in arcu nec, vulputate cursus ligula. 
-
-Duis tincidunt arcu pulvinar, laoreet nulla sit amet, scelerisque ligula.
-Curabitur nisl ipsum, scelerisque eu scelerisque in, fringilla at velit. 
-Maecenas congue ultrices tincidunt. 
-Etiam ornare ullamcorper lorem, non gravida orci malesuada sit amet.
-Donec eu ex in magna consequat lacinia. 
-
-Vestibulum blandit non nibh sed consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-Nullam rutrum gravida risus. Duis eu magna maximus, sodales massa at, mattis risus.
-Suspendisse bibendum nec magna quis rutrum."
 editable = false
 middle_mouse_paste_enabled = false
 
-[node name="Panel" type="GridContainer" parent="ConsoleCanvas/ConsolePanel/Margin/Grid"]
+[node name="InputGrid" type="GridContainer" parent="Canvas/Panel/Margin/MainGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
-[node name="Input" type="LineEdit" parent="ConsoleCanvas/ConsolePanel/Margin/Grid/Panel"]
+[node name="UserInput" type="LineEdit" parent="Canvas/Panel/Margin/MainGrid/InputGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 select_all_on_focus = true
 caret_blink = true
 
-[node name="Submit" type="Button" parent="ConsoleCanvas/ConsolePanel/Margin/Grid/Panel"]
+[node name="Submit" type="Button" parent="Canvas/Panel/Margin/MainGrid/InputGrid"]
 layout_mode = 2
 text = "Submit"
+
+[connection signal="text_submitted" from="Canvas/Panel/Margin/MainGrid/InputGrid/UserInput" to="." method="_OnSubmitEnter"]
+[connection signal="pressed" from="Canvas/Panel/Margin/MainGrid/InputGrid/Submit" to="." method="_OnSubmitPressed"]
