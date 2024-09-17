@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://cks7xa6e47upl"]
+
+[ext_resource type="Theme" uid="uid://bfomwq0lwf8op" path="res://Scenes/Debug/ConsoleTheme.tres" id="1_7udpr"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConsoleCanvas" type="CanvasLayer" parent="."]
+
+[node name="ConsolePanel" type="PanelContainer" parent="ConsoleCanvas"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 396.0
+offset_bottom = 380.0
+theme = ExtResource("1_7udpr")
+
+[node name="Margin" type="MarginContainer" parent="ConsoleCanvas/ConsolePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Grid" type="GridContainer" parent="ConsoleCanvas/ConsolePanel/Margin"]
+layout_mode = 2
+
+[node name="Output" type="TextEdit" parent="ConsoleCanvas/ConsolePanel/Margin/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_readonly_color = Color(0.87451, 0.87451, 0.87451, 1)
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Donec convallis magna nec consequat dictum.
+Fusce sed sollicitudin dolor. 
+Praesent id maximus augue. 
+Pellentesque purus elit, imperdiet in arcu nec, vulputate cursus ligula. 
+
+Duis tincidunt arcu pulvinar, laoreet nulla sit amet, scelerisque ligula.
+Curabitur nisl ipsum, scelerisque eu scelerisque in, fringilla at velit. 
+Maecenas congue ultrices tincidunt. 
+Etiam ornare ullamcorper lorem, non gravida orci malesuada sit amet.
+Donec eu ex in magna consequat lacinia. 
+
+Vestibulum blandit non nibh sed consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+Nullam rutrum gravida risus. Duis eu magna maximus, sodales massa at, mattis risus.
+Suspendisse bibendum nec magna quis rutrum."
+editable = false
+middle_mouse_paste_enabled = false
+
+[node name="Panel" type="GridContainer" parent="ConsoleCanvas/ConsolePanel/Margin/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="Input" type="LineEdit" parent="ConsoleCanvas/ConsolePanel/Margin/Grid/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+select_all_on_focus = true
+caret_blink = true
+
+[node name="Submit" type="Button" parent="ConsoleCanvas/ConsolePanel/Margin/Grid/Panel"]
+layout_mode = 2
+text = "Submit"

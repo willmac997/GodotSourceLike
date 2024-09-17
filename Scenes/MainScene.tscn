@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkcbc7eaaufm1"]
+[gd_scene load_steps=14 format=3 uid="uid://dkcbc7eaaufm1"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_hqbna"]
 [ext_resource type="Script" path="res://Scripts/Debug/DrawRelativeTest.cs" id="2_0m30i"]
 [ext_resource type="Script" path="res://Scripts/Debug/RotateCameraTest.cs" id="2_u6d1q"]
+[ext_resource type="PackedScene" uid="uid://cks7xa6e47upl" path="res://Scenes/Debug/Console.tscn" id="3_m62hp"]
 
 [sub_resource type="Environment" id="Environment_e754o"]
 background_energy_multiplier = 2.0
@@ -54,6 +55,8 @@ script = ExtResource("2_u6d1q")
 
 [node name="Camera3D" type="Camera3D" parent="CameraMarker/CameraArmYaw/CameraArmPitch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)
+
+[node name="Control" parent="CameraMarker/CameraArmYaw/CameraArmPitch/Camera3D" instance=ExtResource("3_m62hp")]
 
 [node name="Box1" type="RigidBody3D" parent="."]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 1.01022, -2.5)
