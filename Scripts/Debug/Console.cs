@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Console : Control
 {
-  private CanvasLayer _Canvas;
+  private Window _Window;
   private PanelContainer _Panel;
   private TextEdit _OutputHistory;
   private LineEdit _UserInput;
@@ -10,25 +10,31 @@ public partial class Console : Control
 
   public override void _Ready()
   {
-    _Canvas = GetNode<CanvasLayer>("Canvas");
-    _Panel = GetNode<PanelContainer>("Canvas/Panel");
-    _OutputHistory = GetNode<TextEdit>("Canvas/Panel/Margin/MainGrid/OutputHistory");
-    _UserInput = GetNode<LineEdit>("Canvas/Panel/Margin/MainGrid/InputGrid/UserInput");
-    _Submit = GetNode<Button>("Canvas/Panel/Margin/MainGrid/InputGrid/Submit");
+    _Window = GetNode<Window>("Canvas/Window");
+    _Panel = GetNode<PanelContainer>("Canvas/Window/Panel");
+    _OutputHistory = GetNode<TextEdit>("Canvas/Window/Panel/MainGrid/OutputHistory");
+    _UserInput = GetNode<LineEdit>("Canvas/Window/Panel/MainGrid/InputGrid/UserInput");
+    _Submit = GetNode<Button>("Canvas/Window/Panel/MainGrid/InputGrid/Submit");
   }
 
   public override void _Input(InputEvent @event)
   {
+    // Strange input doesnt register when focused on the window
     if (@event is InputEventKey keyEvent)
     {
       if (keyEvent.Pressed && keyEvent.Keycode == Key.Quoteleft)
       {
-        _Canvas.Visible = !_Canvas.Visible;
-        if (!_Canvas.Visible) Input.MouseMode = Input.MouseModeEnum.Captured;
-        else Input.MouseMode = Input.MouseModeEnum.Visible;
-        CallDeferred("FocusUserInput");
+        ToggleConsole();
       }
     }
+  }
+
+  private void ToggleConsole()
+  {
+    _Window.Visible = !_Window.Visible;
+    if (!_Window.Visible) Input.MouseMode = Input.MouseModeEnum.Captured;
+    else Input.MouseMode = Input.MouseModeEnum.Visible;
+    CallDeferred("FocusUserInput");
   }
 
   private void FocusUserInput()

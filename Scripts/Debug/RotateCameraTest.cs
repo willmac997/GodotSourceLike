@@ -17,7 +17,6 @@ public partial class RotateCameraTest : Node3D
     Input.MouseMode = Input.MouseModeEnum.Captured;
     _CameraArmYaw = GetNode<Node3D>(".");
     _CameraArmPitch = GetNode<Node3D>("CameraArmPitch");
-    // _Camera = GetNode<Camera3D>("CameraArmPitch/Camera3D");
   }
 
   public override void _Input(InputEvent @event)

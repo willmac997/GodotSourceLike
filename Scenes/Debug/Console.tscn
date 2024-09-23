@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cks7xa6e47upl"]
+[gd_scene load_steps=5 format=3 uid="uid://cks7xa6e47upl"]
 
 [ext_resource type="Script" path="res://Scripts/Debug/Console.cs" id="1_ff7cy"]
-[ext_resource type="Theme" uid="uid://bfomwq0lwf8op" path="res://Resources/ConsoleTheme.tres" id="2_egc6s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw32h"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttxs3"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7pwh"]
+bg_color = Color(0, 0, 0, 0)
 
 [node name="Console" type="Control"]
 layout_mode = 3
@@ -13,47 +21,60 @@ grow_vertical = 2
 script = ExtResource("1_ff7cy")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Window" type="Window" parent="Canvas"]
+transparent_bg = true
+handle_input_locally = false
+title = "Developer Console"
+position = Vector2i(15, 40)
+size = Vector2i(310, 300)
 visible = false
+transient = true
+exclusive = true
+transparent = true
+min_size = Vector2i(150, 150)
+theme_override_constants/resize_margin = 25
+theme_override_font_sizes/title_font_size = 12
 
-[node name="Panel" type="PanelContainer" parent="Canvas"]
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 396.0
-offset_bottom = 380.0
-theme = ExtResource("2_egc6s")
+[node name="Panel" type="PanelContainer" parent="Canvas/Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pw32h")
 
-[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
+[node name="MainGrid" type="GridContainer" parent="Canvas/Window/Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
-[node name="MainGrid" type="GridContainer" parent="Canvas/Panel/Margin"]
-layout_mode = 2
-
-[node name="OutputHistory" type="TextEdit" parent="Canvas/Panel/Margin/MainGrid"]
+[node name="OutputHistory" type="TextEdit" parent="Canvas/Window/Panel/MainGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_font_sizes/font_size = 12
 editable = false
 middle_mouse_paste_enabled = false
 
-[node name="InputGrid" type="GridContainer" parent="Canvas/Panel/Margin/MainGrid"]
+[node name="InputGrid" type="GridContainer" parent="Canvas/Window/Panel/MainGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
-[node name="UserInput" type="LineEdit" parent="Canvas/Panel/Margin/MainGrid/InputGrid"]
+[node name="UserInput" type="LineEdit" parent="Canvas/Window/Panel/MainGrid/InputGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_ttxs3")
 select_all_on_focus = true
 caret_blink = true
 
-[node name="Submit" type="Button" parent="Canvas/Panel/Margin/MainGrid/InputGrid"]
+[node name="Submit" type="Button" parent="Canvas/Window/Panel/MainGrid/InputGrid"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxFlat_x7pwh")
 text = "Submit"
 
-[connection signal="text_submitted" from="Canvas/Panel/Margin/MainGrid/InputGrid/UserInput" to="." method="_OnSubmitEnter"]
-[connection signal="pressed" from="Canvas/Panel/Margin/MainGrid/InputGrid/Submit" to="." method="_OnSubmitPressed"]
+[connection signal="close_requested" from="Canvas/Window" to="." method="ToggleConsole"]
+[connection signal="text_submitted" from="Canvas/Window/Panel/MainGrid/InputGrid/UserInput" to="." method="_OnSubmitEnter"]
+[connection signal="pressed" from="Canvas/Window/Panel/MainGrid/InputGrid/Submit" to="." method="_OnSubmitPressed"]
