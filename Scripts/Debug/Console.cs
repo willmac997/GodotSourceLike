@@ -8,10 +8,6 @@ public partial class Console : Control
   private LineEdit _UserInput;
   private Button _Submit;
 
-  // I dont like having the console enable via game.cs, doing it that way doesnt stop input in children
-  // so lets do it this way https://www.reddit.com/r/godot/comments/t376cb/how_do_i_call_an_auto_load_variable_in_c/
-  // then just dont ProcessKeyboardInput in _PhysicsProcess from RotateCameraTest.cs
-
   public override void _Ready()
   {
     _Window = GetNode<Window>("Canvas/Window");
