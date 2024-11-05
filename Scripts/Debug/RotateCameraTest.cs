@@ -39,7 +39,7 @@ public partial class RotateCameraTest : Node3D
 
   public override void _PhysicsProcess(double delta)
   {
-    ProcessKeyboardInput(delta);
+    if (!Game.Console) ProcessKeyboardInput(delta);
     _CameraArmPitch.Rotation = new Vector3((float)Mathf.Clamp(_CameraArmPitch.Rotation.X, _MinYawAngle, _MaxYawAngle), 0, 0); // Also clamp here
   }
 

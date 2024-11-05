@@ -8,6 +8,10 @@ public partial class Console : Control
   private LineEdit _UserInput;
   private Button _Submit;
 
+  // I dont like having the console enable via game.cs, doing it that way doesnt stop input in children
+  // so lets do it this way https://www.reddit.com/r/godot/comments/t376cb/how_do_i_call_an_auto_load_variable_in_c/
+  // then just dont ProcessKeyboardInput in _PhysicsProcess from RotateCameraTest.cs
+
   public override void _Ready()
   {
     _Window = GetNode<Window>("Canvas/Window");
@@ -19,6 +23,7 @@ public partial class Console : Control
 
   public override void _Input(InputEvent @event)
   {
+    GD.Print("Console Input");
     // Strange input doesnt register when focused on the window
     if (@event is InputEventKey keyEvent)
     {
@@ -31,9 +36,11 @@ public partial class Console : Control
 
   private void ToggleConsole()
   {
-    _Window.Visible = !_Window.Visible;
-    if (!_Window.Visible) Input.MouseMode = Input.MouseModeEnum.Captured;
+    GD.Print("Toggling Console");
+    Game.Console = !Game.Console;
+    if (!Game.Console) Input.MouseMode = Input.MouseModeEnum.Captured;
     else Input.MouseMode = Input.MouseModeEnum.Visible;
+    _Window.Visible = Game.Console;
     CallDeferred("FocusUserInput");
   }
 
