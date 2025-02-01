@@ -1,0 +1,3 @@
+- Use that cooler debug draw addon
+- ImGUI instead of Godot UI
+- AABB - Axis Aligned Bounding Box instead of player capsule or box collider

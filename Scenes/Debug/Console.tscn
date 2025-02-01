@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Debug/Console.cs" id="1_ff7cy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw32h"]
-bg_color = Color(0, 0, 0, 0)
+bg_color = Color(0.773856, 2.23808e-06, 9.62615e-07, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttxs3"]
 bg_color = Color(0, 0, 0, 0)
