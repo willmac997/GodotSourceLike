@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DebugDraw="*res://addons/debug_drawing/DebugDraw.cs"
+ImGuiRoot="*res://addons/imgui-godot/data/ImGuiRoot.tscn"
 
 [dotnet]
 
@@ -25,7 +26,7 @@ project/assembly_name="SourceLikeProject"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg", "res://addons/imgui-godot/plugin.cfg")
 
 [input]
 

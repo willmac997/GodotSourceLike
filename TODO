@@ -1,3 +1,4 @@
-- Use that cooler debug draw addon
-- ImGUI instead of Godot UI
+-  ̶U̶s̶e̶ ̶t̶h̶a̶t̶ ̶c̶o̶o̶l̶e̶r̶ ̶d̶e̶b̶u̶g̶ ̶d̶r̶a̶w̶ ̶a̶d̶d̶o̶n̶
+-  ̶I̶m̶G̶U̶I̶ ̶i̶n̶s̶t̶e̶a̶d̶ ̶o̶f̶ ̶G̶o̶d̶o̶t̶ ̶U̶I̶
+- Actaully make something now lol
 - AABB - Axis Aligned Bounding Box instead of player capsule or box collider
