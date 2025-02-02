@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cks7xa6e47upl"]
 
-[ext_resource type="Script" path="res://Scripts/Debug/Console.cs" id="1_ff7cy"]
+[ext_resource type="Script" path="res://scripts/debug/Console.cs" id="1_ff7cy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw32h"]
 bg_color = Color(0.773856, 2.23808e-06, 9.62615e-07, 0)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://dkcbc7eaaufm1"]
 
-[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_hqbna"]
-[ext_resource type="Script" path="res://Scripts/Debug/RotateCameraTest.cs" id="2_u6d1q"]
-[ext_resource type="PackedScene" uid="uid://cks7xa6e47upl" path="res://Scenes/Debug/Console.tscn" id="3_m62hp"]
+[ext_resource type="Script" path="res://scripts/Game.cs" id="1_hqbna"]
+[ext_resource type="Script" path="res://scripts/debug/RotateCameraTest.cs" id="2_u6d1q"]
+[ext_resource type="PackedScene" uid="uid://cks7xa6e47upl" path="res://scenes/debug/Console.tscn" id="3_m62hp"]
 
 [sub_resource type="Environment" id="Environment_e754o"]
 background_energy_multiplier = 2.0
