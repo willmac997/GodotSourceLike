@@ -1,20 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkcbc7eaaufm1"]
+[gd_scene load_steps=11 format=3 uid="uid://dkcbc7eaaufm1"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_hqbna"]
-[ext_resource type="Script" path="res://scripts/debug/RotateCameraTest.cs" id="2_u6d1q"]
-[ext_resource type="PackedScene" uid="uid://cks7xa6e47upl" path="res://scenes/debug/Console.tscn" id="3_m62hp"]
-[ext_resource type="Script" path="res://scripts/debug/MyNode.cs" id="4_5mdys"]
+[ext_resource type="Script" path="res://scripts/debug/CameraTest.cs" id="2_cv5wk"]
+[ext_resource type="Script" path="res://scripts/debug/ImGuiDebugMenu.cs" id="4_5mdys"]
 
 [sub_resource type="Environment" id="Environment_e754o"]
 background_energy_multiplier = 2.0
 ambient_light_color = Color(0.937255, 0.937255, 0.937255, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj4nd"]
-albedo_color = Color(0.2, 0.2, 0.2, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_a8eg0"]
-radial_segments = 32
-rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41kht"]
 albedo_color = Color(0.952941, 0.952941, 0.952941, 1)
@@ -41,22 +33,11 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e754o")
 
-[node name="CameraMarker" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.10213, 0, 0, 0, 0.10213, 0, 0, 0, 0.10213, 0, 2, 0)
-material_override = SubResource("StandardMaterial3D_pj4nd")
-cast_shadow = 0
-mesh = SubResource("SphereMesh_a8eg0")
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("2_cv5wk")
 
-[node name="CameraArmYaw" type="Node3D" parent="CameraMarker"]
-transform = Transform3D(9.79144, 0, 0, 0, 9.79144, 0, 0, 0, 9.79144, 0, 0, 0)
-script = ExtResource("2_u6d1q")
-
-[node name="CameraArmPitch" type="Node3D" parent="CameraMarker/CameraArmYaw"]
-
-[node name="Camera3D" type="Camera3D" parent="CameraMarker/CameraArmYaw/CameraArmPitch"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5)
-
-[node name="Console" parent="CameraMarker/CameraArmYaw/CameraArmPitch/Camera3D" instance=ExtResource("3_m62hp")]
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="Box1" type="RigidBody3D" parent="."]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 1.01022, -2.5)
