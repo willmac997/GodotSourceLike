@@ -37,7 +37,7 @@ environment = SubResource("Environment_e754o")
 script = ExtResource("2_cv5wk")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017108, 0.0211277, 0.00825119)
 
 [node name="Box1" type="RigidBody3D" parent="."]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 1.01022, -2.5)
